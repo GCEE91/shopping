@@ -1,24 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 const Header = () => {
+  const [toggle, setToggle] = useState(false);
+  const [login, setLogin] = useState(false);
+
   return (
     <div>
       <nav className='navBar'>
-        <div className=''>
-          <FontAwesomeIcon icon={faUserSecret} color='white' size='2x' />
+        <div
+          className='navBar_toggleBtn'
+          onClick={() => {
+            setToggle(!toggle);
+          }}>
+          <FontAwesomeIcon icon={faBars} size='2x' />
         </div>
+
+        <div className='navBar_logo'>
+          <FontAwesomeIcon icon={faUserSecret} size='2x' />
+        </div>
+
         <ul className='navBar_menu'>
-          <li>T-shirt</li>
-          <li>Shirt</li>
-          <li>Shose</li>
-          <li>Etc</li>
+          <li className='navBar_menu_item'>Shopping</li>
+          <li className='navBar_menu_item'>Cart</li>
+          <li className='navBar_menu_item'>MyPage</li>
+
+          {login === false ? (
+            <li className='navBar_menu_item'>Login</li>
+          ) : (
+            <li className='navBar_menu_item'>Logout</li>
+          )}
+          {login === false ? (
+            <li className='navBar_menu_item'>SignUp</li>
+          ) : null}
         </ul>
 
-        <div>
-          <FontAwesomeIcon icon={faShoppingBag} color='white' size='2x' />
+        {/* 로그인되면 로그아웃으로 바꿔주고, */}
+        {toggle === true ? (
+          <ul className='navBar_menu2'>
+            <li className='navBar_menu_item'>Shopping</li>
+            <li className='navBar_menu_item'>Cart</li>
+            <li className='navBar_menu_item'>MyPage</li>
+            {login === false ? (
+              <li className='navBar_menu_item'>Login</li>
+            ) : (
+              <li className='navBar_menu_item'>Logout</li>
+            )}
+            {login === false ? (
+              <li className='navBar_menu_item'>SignUp</li>
+            ) : null}
+          </ul>
+        ) : null}
+
+        {/* 반응형 로고 가운데로 놓기위해서 */}
+        <div className='navBar_cart'>
+          <FontAwesomeIcon icon={faShoppingBag} size='2x' color='black' />
         </div>
       </nav>
     </div>

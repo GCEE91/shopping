@@ -15,50 +15,81 @@ body {
   display: none;
 }
 
+.navBar_logo {
+  color: white;
+  cursor: pointer;
+}
+
 .navBar_menu {
   width: 50%;
-  margin: 0px;
+  margin: 0 150px 0 0;
+  padding: 0px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   list-style: none;
   color: white;
 }
 
-.App {
-  text-align: center;
+.navBar_menu2 {
+  display: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navBar_menu_item {
+  padding: 8px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.navBar_menu_item:hover {
+  color: black;
+  background-color: white;
+}
+
+.navBar_cart {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navBar {
+    justify-content: space-between;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .navBar_toggleBtn {
+    margin-left: 20px;
+    display: flex;
+    color: white;
+    cursor: pointer;
   }
-  to {
-    transform: rotate(360deg);
+
+  .navBar_menu {
+    display: none;
+  }
+
+  .navBar_menu2 {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: white;
+    background-color: rgb(0, 0, 0, 0.85);
+  }
+
+  .navBar_menu_item:hover {
+    width: 30%;
+    text-align: center;
+    color: black;
+    background-color: white;
+  }
+
+  .navBar_cart {
+    display: flex;
+    margin-right: 15px;
   }
 }
