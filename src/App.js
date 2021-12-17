@@ -1,14 +1,16 @@
 import React from 'react';
-
 import './App.css';
+
 import Header from './shared/Header';
-import EventCard from './component/EventCard';
+import Main from './pages/Main';
+import Shopping from './pages/Shopping';
 
 function App() {
   return (
     <React.Fragment>
       <Header />
-      <EventCard />
+      {/* <Main /> */}
+      <Shopping />
     </React.Fragment>
   );
 }

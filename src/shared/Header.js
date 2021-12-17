@@ -20,7 +20,7 @@ const Header = () => {
         </div>
 
         <div className='navBar_logo'>
-          <FontAwesomeIcon icon={faUserSecret} size='2x' />
+          <FontAwesomeIcon icon={faUserSecret} size='3x' />
         </div>
 
         <ul className='navBar_menu'>

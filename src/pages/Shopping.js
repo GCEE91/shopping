@@ -1,0 +1,138 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import ItemCard from '../component/ItemCard';
+
+import Jacket from '../image/jaket.png';
+import Shose from '../image/shose.png';
+import Hat from '../image/hat.jpg';
+
+const Shopping = () => {
+  const [bannerImg, setBannerImg] = useState(Jacket);
+  const [category, setCategory] = useState('Jacket');
+
+  return (
+    <React.Fragment>
+      <CategoryButtonsContainer>
+        <CategoryButton
+          onClick={(e) => {
+            setBannerImg(Jacket);
+            setCategory(e.target.value);
+          }}
+          value='Jacket'
+          width={category === 'Jacket' ? '22vw' : '20vw'}
+          height={category === 'Jacket' ? '8vh' : '5vh'}
+          color={category === 'Jacket' ? 'white' : '#212121'}
+          backgroundColor={category === 'Jacket' ? '#212121' : 'white'}>
+          Jacket
+        </CategoryButton>
+
+        <CategoryButton
+          onClick={(e) => {
+            setBannerImg(Shose);
+            setCategory(e.target.value);
+          }}
+          value='Shose'
+          width={category === 'Shose' ? '22vw' : '20vw'}
+          height={category === 'Shose' ? '8vh' : '5vh'}
+          color={category === 'Shose' ? 'white' : '#212121'}
+          backgroundColor={category === 'Shose' ? '#212121' : 'white'}>
+          Shose
+        </CategoryButton>
+
+        <CategoryButton
+          onClick={(e) => {
+            setBannerImg(Hat);
+            setCategory(e.target.value);
+          }}
+          value='Hat'
+          width={category === 'Hat' ? '22vw' : '20vw'}
+          height={category === 'Hat' ? '8vh' : '5vh'}
+          color={category === 'Hat' ? 'white' : '#212121'}
+          backgroundColor={category === 'Hat' ? '#212121' : 'white'}>
+          Hat
+        </CategoryButton>
+      </CategoryButtonsContainer>
+
+      <BannerImgBox src={bannerImg} />
+
+      <P margin='30px 0 0 0' size='30px' weight='800'>
+        Items
+      </P>
+      <Hr />
+      <ItemCardContainer>
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+      </ItemCardContainer>
+    </React.Fragment>
+  );
+};
+
+const CategoryButtonsContainer = styled.div`
+  height: 8.5vh;
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const CategoryButton = styled.button`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  color: ${(props) => props.color};
+  font-size: 24px;
+  font-weight: 800;
+  border: none;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+  background-color: ${(props) => props.backgroundColor};
+
+  transition: width 1.5s, height 1.5s;
+  /* transition: property timing-function duration delay */
+
+  &:hover {
+    width: 22vw;
+    height: 8vh;
+    color: white;
+    background-color: #212121;
+    transition: width 1.5s, height 1.5s;
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    font-size: 18px;
+  }
+`;
+
+const BannerImgBox = styled.img`
+  width: 100%;
+  height: 65vh;
+`;
+
+const P = styled.p`
+  text-align: center;
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  font-size: ${(props) => props.size};
+  font-weight: ${(props) => props.weight};
+`;
+
+const Hr = styled.hr`
+  width: 95%;
+  margin: 5px auto 0;
+`;
+
+const ItemCardContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  @media ${(props) => props.theme.mobile} {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export default Shopping;

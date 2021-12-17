@@ -4,7 +4,7 @@ body {
 }
 
 .navBar {
-  height: 70px;
+  height: 90px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -16,6 +16,7 @@ body {
 }
 
 .navBar_logo {
+  size: '3x';
   color: white;
   cursor: pointer;
 }
@@ -37,6 +38,7 @@ body {
 .navBar_menu_item {
   padding: 8px;
   border-radius: 10px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -67,11 +69,12 @@ body {
   }
 
   .navBar_menu2 {
+    z-index: 999;
     width: 100%;
     padding: 0;
     margin: 0;
     position: absolute;
-    top: 70px;
+    top: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,6 +82,10 @@ body {
     list-style: none;
     color: white;
     background-color: rgb(0, 0, 0, 0.85);
+  }
+
+  .navBar_menu_item {
+    font-size: 16px;
   }
 
   .navBar_menu_item:hover {
