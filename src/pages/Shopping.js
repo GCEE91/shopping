@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import ItemCard from '../component/ItemCard';
 
 import Jacket from '../image/jaket.png';
 import Shose from '../image/shose.png';
 import Hat from '../image/hat.jpg';
 
+import JacketData from '../ItemData/JacketData';
+import ShoseData from '../ItemData/ShoseData';
+import HatData from '../ItemData/HatData';
+
 const Shopping = () => {
   const [bannerImg, setBannerImg] = useState(Jacket);
   const [category, setCategory] = useState('Jacket');
+  const [itemDatas, setItemDatas] = useState(JacketData);
 
   return (
     <React.Fragment>
@@ -18,6 +22,7 @@ const Shopping = () => {
           onClick={(e) => {
             setBannerImg(Jacket);
             setCategory(e.target.value);
+            setItemDatas(JacketData);
           }}
           value='Jacket'
           width={category === 'Jacket' ? '22vw' : '20vw'}
@@ -31,6 +36,7 @@ const Shopping = () => {
           onClick={(e) => {
             setBannerImg(Shose);
             setCategory(e.target.value);
+            setItemDatas(ShoseData);
           }}
           value='Shose'
           width={category === 'Shose' ? '22vw' : '20vw'}
@@ -44,6 +50,7 @@ const Shopping = () => {
           onClick={(e) => {
             setBannerImg(Hat);
             setCategory(e.target.value);
+            setItemDatas(HatData);
           }}
           value='Hat'
           width={category === 'Hat' ? '22vw' : '20vw'}
@@ -61,12 +68,9 @@ const Shopping = () => {
       </P>
       <Hr />
       <ItemCardContainer>
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
+        {itemDatas.map((itemData, i) => {
+          return <ItemCard itemData={itemData} key={itemData.item_id} />;
+        })}
       </ItemCardContainer>
     </React.Fragment>
   );
@@ -83,22 +87,21 @@ const CategoryButton = styled.button`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   color: ${(props) => props.color};
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   border: none;
   border-bottom: 1px solid black;
   box-sizing: border-box;
   background-color: ${(props) => props.backgroundColor};
 
-  transition: width 1.5s, height 1.5s;
-  /* transition: property timing-function duration delay */
+  transition: width 0.5s, height 0.5s;
+  /* transition: transition-property(속성) transition-duration(실행시간) transition-timing-function(실행동안 가속,감속 ease, ease-in-out같은거) delay(몇초지연뒤 실행할건지) */
 
   &:hover {
     width: 22vw;
     height: 8vh;
     color: white;
     background-color: #212121;
-    transition: width 1.5s, height 1.5s;
   }
 
   @media ${(props) => props.theme.mobile} {

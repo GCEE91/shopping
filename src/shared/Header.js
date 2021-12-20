@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
+  const history = useHistory();
   const [toggle, setToggle] = useState(false);
   const [login, setLogin] = useState(false);
 
@@ -19,12 +22,22 @@ const Header = () => {
           <FontAwesomeIcon icon={faBars} size='2x' />
         </div>
 
-        <div className='navBar_logo'>
+        <div
+          className='navBar_logo'
+          onClick={() => {
+            history.push('/');
+          }}>
           <FontAwesomeIcon icon={faUserSecret} size='3x' />
         </div>
 
         <ul className='navBar_menu'>
-          <li className='navBar_menu_item'>Shopping</li>
+          <li
+            className='navBar_menu_item'
+            onClick={() => {
+              history.push('/shopping');
+            }}>
+            Shopping
+          </li>
           <li className='navBar_menu_item'>Cart</li>
           <li className='navBar_menu_item'>MyPage</li>
 
@@ -41,7 +54,13 @@ const Header = () => {
         {/* 로그인되면 로그아웃으로 바꿔주고, */}
         {toggle === true ? (
           <ul className='navBar_menu2'>
-            <li className='navBar_menu_item'>Shopping</li>
+            <li
+              className='navBar_menu_item'
+              onClick={() => {
+                history.push('/shopping');
+              }}>
+              Shopping
+            </li>
             <li className='navBar_menu_item'>Cart</li>
             <li className='navBar_menu_item'>MyPage</li>
             {login === false ? (
