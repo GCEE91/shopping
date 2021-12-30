@@ -1,33 +1,59 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import '../style/Alert.scss';
 import AllItemData from '../ItemData/Alldata';
+import DataContext from '../shared/DataContext';
 
-const Detail = () => {
+const Detail = (props) => {
+  const cart = props.cart;
+  const setCart = props.setCart;
+
   let { id } = useParams();
   let history = useHistory();
   let Itemdata = AllItemData.filter((i) => i.item_id === Number(id));
   const [data, setData] = useState(Itemdata[0]);
   const [size, setSize] = useState('M');
-  const [count, setCounet] = useState(1);
+  const [count, setCount] = useState(1);
   const [modal, setModal] = useState('detail');
+  const [alert, setAlert] = useState(true);
+  let addCartData = [{ ...data, count: count, size: size }];
 
   const handleSize = (e) => setSize(e.target.value);
 
   const handlePlusCount = (e) => {
-    setCounet(count + 1);
+    setCount((prevcount) => prevcount + 1);
   };
 
   const handleSubtractCount = (e) => {
     if (count === 1) return;
-    setCounet(count - 1);
+    setCount((prevcount) => prevcount - 1);
   };
   console.log(size);
   console.log(count);
 
+  // React.useEffect(() => {
+  //   let 타이머 = setTimeout(() => {
+  //     setAlert(false);
+  //     console.log('콘솔');
+  //   }, 2000);
+  //   return () => {
+  //     clearTimeout(타이머);
+  //   };
+  // }, [alert]);
+
   return (
     <React.Fragment>
       <ItemContainer>
+        {/* {alert === true ? (
+          <div className='alert'>
+            <div>
+              <p>수량이 얼마 남지 않았어요!</p>
+            </div>
+          </div>
+        ) : (
+          ''
+        )} */}
         {/* 이미지 div */}
         <ImageDivBox width='35vw'>
           <ItemImg src={data.detailsrc} />
@@ -109,20 +135,22 @@ const Detail = () => {
           <DivBox margin='20px 0 0 0'>
             <Button
               onClick={() => {
-                history.goBack();
+                setCart([...cart, ...addCartData]);
               }}>
               장바구니 추가
             </Button>
           </DivBox>
         </DetailDivBox>
+        {/* <p>{state.name}</p>
+        <p>{state.age}</p> */}
       </ItemContainer>
 
       <ListDivBox
         display='flex'
         justifyContent='space-around'
-        margin='60px 0 0 0'
-        size='20px'>
+        margin='60px 0 0 0'>
         <P
+          size='20px'
           weight='600'
           margin='0'
           cursor='pointer'
@@ -132,6 +160,7 @@ const Detail = () => {
           상세
         </P>
         <P
+          size='20px'
           weight='600'
           margin='0'
           cursor='pointer'
@@ -141,6 +170,7 @@ const Detail = () => {
           배송
         </P>
         <P
+          size='20px'
           weight='600'
           margin='0'
           cursor='pointer'
@@ -173,6 +203,7 @@ const Detail = () => {
 };
 
 const ItemContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   margin: 40px 0 0 0;

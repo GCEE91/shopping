@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../style/Header.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
@@ -38,7 +39,13 @@ const Header = () => {
             }}>
             Shopping
           </li>
-          <li className='navBar_menu_item'>Cart</li>
+          <li
+            className='navBar_menu_item'
+            onClick={() => {
+              history.push('/mycart');
+            }}>
+            Cart
+          </li>
           <li className='navBar_menu_item'>MyPage</li>
 
           {login === false ? (
@@ -61,7 +68,13 @@ const Header = () => {
               }}>
               Shopping
             </li>
-            <li className='navBar_menu_item'>Cart</li>
+            <li
+              className='navBar_menu_item'
+              onClick={() => {
+                history.push('/mycart');
+              }}>
+              Cart
+            </li>
             <li className='navBar_menu_item'>MyPage</li>
             {login === false ? (
               <li className='navBar_menu_item'>Login</li>

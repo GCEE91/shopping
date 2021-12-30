@@ -15,10 +15,10 @@ const ItemCard = (props) => {
       <OverFlowDiv>
         <Img src={itemData.src} />
       </OverFlowDiv>
-      <P margin='10px 0 0 0' size='30px' weight='bold'>
+      <P className='title' margin='10px 0 0 0' size='30px' weight='bold'>
         {itemData.title}
       </P>
-      <P margin='0 0 0 0' size='25px' weight='800'>
+      <P className='price' margin='0 0 0 0' size='25px' weight='bold'>
         {itemData.price}원
       </P>
     </Container>
@@ -27,12 +27,13 @@ const ItemCard = (props) => {
 
 const Container = styled.div`
   width: 30vw;
-  height: 58vh;
-  margin-bottom: 50px;
+  height: 60vh;
+  margin-bottom: 75px;
 
   @media ${(props) => props.theme.mobile} {
     width: 90vw;
-    height: 65vh;
+    height: 70vh;
+    margin-bottom: 0px;
   }
 `;
 const OverFlowDiv = styled.div`
@@ -43,7 +44,6 @@ const Img = styled.img`
   width: 100%;
   height: 50vh;
   border-radius: 5px;
-  overflow: hidden;
 
   transition: all 0.3s ease-in-out;
 
@@ -60,6 +60,10 @@ const P = styled.p`
   margin: ${(props) => props.margin};
   font-size: ${(props) => props.size};
   font-weight: ${(props) => props.weight};
+
+  @media ${(props) => props.theme.mobile} {
+    font-size: 25px;
+  }
 `;
 
 export default ItemCard;
