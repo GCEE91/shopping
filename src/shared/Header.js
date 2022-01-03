@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 import '../style/Header.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +7,9 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const Header = () => {
+const Header = (props) => {
   const history = useHistory();
+  let pathname = props.location.pathname;
   const [toggle, setToggle] = useState(false);
   const [login, setLogin] = useState(false);
 
@@ -26,6 +27,10 @@ const Header = () => {
         <div
           className='navBar_logo'
           onClick={() => {
+            if (pathname.includes('/detail')) {
+              history.push('/shopping');
+              return;
+            }
             history.push('/');
           }}>
           <FontAwesomeIcon icon={faUserSecret} size='3x' />
@@ -65,6 +70,7 @@ const Header = () => {
               className='navBar_menu_item'
               onClick={() => {
                 history.push('/shopping');
+                setToggle(!toggle);
               }}>
               Shopping
             </li>
@@ -72,6 +78,7 @@ const Header = () => {
               className='navBar_menu_item'
               onClick={() => {
                 history.push('/mycart');
+                setToggle(!toggle);
               }}>
               Cart
             </li>
@@ -96,4 +103,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

@@ -83,7 +83,7 @@ const Shopping = () => {
           return <ItemCard itemData={itemData} key={itemData.item_id} />;
         })}
       </ItemCardContainer>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
         <button
           onClick={() => {
             // fetch('https://codingapple1.github.io/shop/data2.json').then() //fetch는 이런식으로 사용함
@@ -101,7 +101,7 @@ const Shopping = () => {
           }}>
           더보기
         </button>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };

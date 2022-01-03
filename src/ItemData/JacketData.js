@@ -24,7 +24,7 @@ const JacketData = [
     item_id: 4,
     category: 'Jacket',
     src: 'image/Item_Jacket.jpg',
-    title: '648 Type A-2 (Horse Hide) -Black-',
+    title: '648 Type A-2 (Horse Hide)',
     price: '190000',
   },
   {

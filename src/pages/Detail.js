@@ -3,20 +3,19 @@ import { useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import '../style/Alert.scss';
 import AllItemData from '../ItemData/Alldata';
-import DataContext from '../shared/DataContext';
+import CartContext from '../shared/CartContext';
 
 const Detail = (props) => {
-  const cart = props.cart;
-  const setCart = props.setCart;
-
-  let { id } = useParams();
+  let { state, actions } = useContext(CartContext);
+  console.log(state, actions);
   let history = useHistory();
+  let { id } = useParams();
   let Itemdata = AllItemData.filter((i) => i.item_id === Number(id));
   const [data, setData] = useState(Itemdata[0]);
   const [size, setSize] = useState('M');
   const [count, setCount] = useState(1);
   const [modal, setModal] = useState('detail');
-  const [alert, setAlert] = useState(true);
+
   let addCartData = [{ ...data, count: count, size: size }];
 
   const handleSize = (e) => setSize(e.target.value);
@@ -29,31 +28,10 @@ const Detail = (props) => {
     if (count === 1) return;
     setCount((prevcount) => prevcount - 1);
   };
-  console.log(size);
-  console.log(count);
-
-  // React.useEffect(() => {
-  //   let 타이머 = setTimeout(() => {
-  //     setAlert(false);
-  //     console.log('콘솔');
-  //   }, 2000);
-  //   return () => {
-  //     clearTimeout(타이머);
-  //   };
-  // }, [alert]);
 
   return (
     <React.Fragment>
       <ItemContainer>
-        {/* {alert === true ? (
-          <div className='alert'>
-            <div>
-              <p>수량이 얼마 남지 않았어요!</p>
-            </div>
-          </div>
-        ) : (
-          ''
-        )} */}
         {/* 이미지 div */}
         <ImageDivBox width='35vw'>
           <ItemImg src={data.detailsrc} />
@@ -135,17 +113,32 @@ const Detail = (props) => {
           <DivBox margin='20px 0 0 0'>
             <Button
               onClick={() => {
-                setCart([...cart, ...addCartData]);
+                let a;
+                a = state.cart.findIndex((i) => {
+                  return (
+                    i.item_id === addCartData[0].item_id &&
+                    i.size === addCartData[0].size
+                  );
+                });
+
+                if (a !== -1) {
+                  let b = [...state.cart];
+                  b[a].count = b[a].count + addCartData[0].count;
+                  actions.setCart([...b]);
+                  window.alert('장바구니 추가완료!');
+                  return;
+                }
+
+                actions.setCart([...state.cart, ...addCartData]);
+                window.alert('장바구니 추가완료!');
               }}>
               장바구니 추가
             </Button>
           </DivBox>
         </DetailDivBox>
-        {/* <p>{state.name}</p>
-        <p>{state.age}</p> */}
       </ItemContainer>
 
-      <ListDivBox
+      {/* <ListDivBox
         display='flex'
         justifyContent='space-around'
         margin='60px 0 0 0'>
@@ -179,8 +172,8 @@ const Detail = (props) => {
           }}>
           교환
         </P>
-      </ListDivBox>
-
+      </ListDivBox> */}
+      {/* 
       <DivBox margin='40px 0 0 0' display='flex' justifyContent='center'>
         {modal === 'detail' ? (
           <img
@@ -197,7 +190,7 @@ const Detail = (props) => {
             src='https://gceebucket.s3.ap-northeast-2.amazonaws.com/exchange.png'
             style={{ width: '50%', height: '50%' }}></img>
         ) : null}
-      </DivBox>
+      </DivBox> */}
     </React.Fragment>
   );
 };
